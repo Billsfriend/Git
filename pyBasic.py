@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # this lesson is based on python 3.8
+
 # ====BASIC I/O====
 print('hello world') # basic output: print(). use '' or "" to fold string
 
@@ -49,7 +50,7 @@ var = True
 # In static language like C and Java, variable type has to be claimed when it is defined, and cannot be changed.
 
 # constant variable is usually all capitalized, like this preset constant variable, PI (need import math?)
-print(PI) # print 3.14159265359
+#print(PI) # print 3.14159265359
 # actually, you can change its value as you will.
 
 print(10/3) # print `3.333333333`. division `/` always lead to precise float result
@@ -70,3 +71,98 @@ print('\u4e2d\u6587') # print '中文'. you can use \+unicode to print string
 b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8') # print '中文'. use .decode() to transform bytes back to string
 
 print('hello, %s'% 'bill') # use % to format. %s for string, %d for integer
+
+# ====LIST AND TUPLE====
+
+newlist = [1, '42', True]
+print(newlist[0]) # print 1. use index to fetch item in list
+print(newlist[-1]) # print True. -1 as index of last item
+print(newlist[-2]) # print '42'.
+
+print(len(newlist)) # print 3. len() to get number of items/characters/bytes in list/string/code
+
+newlist.append(3.14) # .append() add item to the end of list
+newlist.insert(1, 'obj') # .insert() insert item to a specific index
+newlist.pop() # .pop() delete the last item
+newlist.pop(0) # delete the item at a specific index
+newlist[2] = False # directly reassign an item in the list
+print(newlist) # print ['obj', '42', False]
+
+newlist.append([-23, 'sdor*ca']) # list can be an item of another list
+
+print(newlist[-1][-2]) # fetch item in the sublist. print -23.
+
+noveltuple = ('vsc', 0)
+# tuple is defined with (). it is just like list except it cannot be reassigned. it has no methods like .append()  
+onetuple = ('lonely',) # to define a tuple with only one item, add a ',' to avoid misintepretation
+print(onetuple) # print ('lonely',)
+
+muttuple = (newlist, ' ')
+newlist[0] = 'mutone' # tuple items' pointer cannot be reassigned, but the content is mutable.
+print(muttuple) # print (['mutone', '42', True, [-23, 'sdor*ca']], ' ')
+
+
+# ====CONDITIONAL====
+
+if 1+1 == 2:
+    print('that is right.') # use 4 spaces to indent subclause
+elif input() == 'password': # caution: in if-elif-else, once a condition is fulfilled, all following will be ignored
+    print('you got that.')
+elif 'false': # any non-null string/number/variable can serve as a True
+    print('any *true value* will be a boolean True condition')
+else:
+    print(None)
+
+if int(input('type in a integer: ')) > 0: # use int() to convert string into integer
+    print('it is positive')
+
+
+# ====LOOPS====
+
+for item in newlist: # for loop can easily use on list & tuple
+    print(item)
+
+sum = 0
+for num in list(range(10)): # range() generate a 0-x integer succession. list() convert it to a list
+    sum = sum + num
+
+while sum == 55:
+    sum = sum + 1
+    if 'I want to continue':
+        continue # use continue to forcibly end this round and start next round
+    break # use break to break out of one layer of loops
+
+
+
+# ====DICT AND SET====
+
+newdict = {'HP': 100, 'MP': 20, 'EXP': 55} # key-value set. can quickly fetch value for a specific key
+print(newdict['HP']) # print 100.
+newdict['MP'] = 25 # reassign value of a key
+
+print('ATK' in newdict) # print False. use `in` to see whether a key exist in the tuple
+print(newdict.get('ATK', -1)) # print -1. use .get() to get the value of a key. 
+# if the key do not exist, it will return a default value (None if a second argument is not there)
+
+newdict.pop('MP') # use .pop() to delete a key and its value. note that dict is unordered
+
+# compare to list, dict occupy more space, but is much faster
+# key in dict must be unmutable object, like number or string. list cannot be dict's key
+
+newset = set([1, 2, 3, 1]) # set take a list to initialize. it is a collection of unordered unique keys
+print(newset) # print {1, 2, 3}. it stores unique keys
+newset.add(4) # .add() to add new keys. if you add old key, that actuall do not change anything
+newset.remove(1) # .remove() to remove keys
+
+set2 = set([3, 5, 2])
+print(set2 & newset) # print {2, 3}. mathmatical intersection
+print(set2 | newset) # print {2, 3, 4, 5}. mathmatical union
+
+# key in set also must be unmutable object
+
+# ====UNMUTABLE OBJECT====
+# why strings are unmutable?
+strA = 'mutant'
+print(strA.replace('a', 'A')) # print 'mutAnt'
+print(strA) # print 'mutant'
+# the string methods can only work on string and return a new one, but cannot change it
